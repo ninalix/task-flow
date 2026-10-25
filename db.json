@@ -1,0 +1,147 @@
+{
+  "projects": [
+    {
+      "id": "1",
+      "name": "IP Australia IP First Response",
+      "description": "A digital guidance tool that helps users understand intellectual property options based on their situation and existing rights.",
+      "deadline": "2026-12-31",
+      "status": "active"
+    },
+    {
+      "id": "2",
+      "name": "Administrative Review Tribunal",
+      "description": "Enhancement and accessibility work for reusable content components across the ART website.",
+      "deadline": "2027-02-17",
+      "status": "active"
+    },
+    {
+      "id": "3",
+      "name": "ATO Essentials to Strengthen Your Small Business",
+      "description": "An accessible online learning experience providing practical guidance and resources for small business owners.",
+      "status": "completed"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "101",
+      "title": "Test ?? Add residency question to Navigator",
+      "description": "Add a residency question to the Navigator flow and update the result logic based on the user's response.",
+      "status": "backlog",
+      "priority": "low",
+      "dueDate": "2027-01-07",
+      "projectId": 2
+    },
+    {
+      "id": "102",
+      "title": "Improve Navigator results layout",
+      "description": "Refine the results page layout and clearly separate recommended actions from additional options.",
+      "status": "todo",
+      "priority": "medium",
+      "dueDate": "2027-01-20",
+      "projectId": 1
+    },
+    {
+      "id": "103",
+      "title": "Update blog author component",
+      "description": "Update the blog author presentation and ensure author information is displayed consistently across articles.",
+      "status": "in-progress",
+      "priority": "medium",
+      "projectId": 1
+    },
+    {
+      "id": "201",
+      "title": "Enhance tooltip and video components",
+      "description": "Embed tooltips in the content body, add transcript options to the video component, and ensure both components are accessible to keyboard and screen reader users.",
+      "status": "backlog",
+      "priority": "medium",
+      "dueDate": "2027-03-05",
+      "projectId": 2
+    },
+    {
+      "id": "202",
+      "title": "Fix tooltip focus management",
+      "description": "Return focus to the triggering element when a tooltip dialog closes and verify keyboard behaviour across supported browsers.",
+      "status": "todo",
+      "priority": "medium",
+      "dueDate": "2026-12-20",
+      "projectId": 2
+    },
+    {
+      "id": "203",
+      "title": "Add Arabic RTL support",
+      "description": "Update reusable interface components to support right-to-left layouts for Arabic content.",
+      "status": "done",
+      "priority": "low",
+      "projectId": 2
+    },
+    {
+      "id": "204",
+      "title": "Resolve table tooltip positioning",
+      "description": "Fix tooltip clipping, arrow positioning and scrolling behaviour when tooltips are used inside responsive tables.",
+      "status": "backlog",
+      "priority": "high",
+      "dueDate": "2027-02-15",
+      "projectId": 2
+    },
+    {
+      "id": "301",
+      "title": "Fix branching scenario keyboard navigation",
+      "description": "Improve keyboard navigation and focus order within branching scenario activities.",
+      "status": "todo",
+      "priority": "high",
+      "dueDate": "2026-10-31",
+      "projectId": 3
+    },
+    {
+      "id": "302",
+      "title": "Improve screen reader announcements",
+      "description": "Ensure dynamic learning content and validation messages are announced correctly by screen readers.",
+      "status": "backlog",
+      "priority": "medium",
+      "dueDate": "2026-12-15",
+      "projectId": 3
+    },
+    {
+      "id": "303",
+      "title": "Resolve branching scenario focus trap",
+      "description": "Prevent keyboard focus from becoming trapped when users navigate between branching scenario steps.",
+      "status": "in-progress",
+      "priority": "critical",
+      "dueDate": "2027-02-20",
+      "projectId": 3
+    },
+    {
+      "id": "304",
+      "title": "Review H5P accessibility",
+      "description": "Complete an accessibility review of H5P learning interactions using keyboard navigation and screen readers.",
+      "status": "done",
+      "priority": "low",
+      "projectId": 3
+    },
+    {
+      "title": "Test task",
+      "description": "Test task Test taskTest taskTest taskTest taskTest taskTest taskTest task",
+      "status": "backlog",
+      "priority": "low",
+      "projectId": 2,
+      "id": "cPEDTJ1wO1E"
+    },
+    {
+      "title": "TYest",
+      "description": "testtesttesttesttesttesttesttesttest",
+      "status": "backlog",
+      "priority": "high",
+      "projectId": 1,
+      "id": "ggmentoV2Ec"
+    },
+    {
+      "title": "s",
+      "description": "s",
+      "status": "backlog",
+      "priority": "critical",
+      "projectId": 1,
+      "id": "8qDCGDb7ZQI"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
