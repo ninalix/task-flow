@@ -78,7 +78,7 @@ function TaskDetailPage() {
       <p>Priority: {task.priority}</p>
       <p>Due date: {task.dueDate ?? "No due date"}</p>
       <button ref={deleteRef} onClick={handleOpenDeleteDialog}>Delete</button>
-      <Link to={`/task/${task.id}/edit`}>Edit task</Link>
+      <Link to={`/tasks/${task.id}/edit`}>Edit task</Link>
       <Link to="/tasks">Back to tasks</Link>
       <ConfirmDialog 
         isOpen={deleteDialogOpen}

@@ -13,10 +13,9 @@ function App() {
         <Route path='/tasks'>
           <Route index element={<TasksPage />}/>
           <Route path=':id' element={<TaskDetailPage />}/>
+          <Route path='new' element={<CreateTaskPage />}/>
+          <Route path=':id/edit' element={<EditTaskPage />}/>
         </Route>
-
-        <Route path='/tasks/new' element={<CreateTaskPage />}/>
-        <Route path='/task/:id/edit' element={<EditTaskPage />}/>
       </Routes>
     </>
   )
