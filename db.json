@@ -23,15 +23,6 @@
   ],
   "tasks": [
     {
-      "id": "101",
-      "title": "Test ?? Add residency question to Navigator",
-      "description": "Add a residency question to the Navigator flow and update the result logic based on the user's response.",
-      "status": "backlog",
-      "priority": "low",
-      "dueDate": "2027-01-07",
-      "projectId": 2
-    },
-    {
       "id": "102",
       "title": "Improve Navigator results layout",
       "description": "Refine the results page layout and clearly separate recommended actions from additional options.",
