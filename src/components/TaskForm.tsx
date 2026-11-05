@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import type { Task, Project } from "../types";
 import type { TaskFormErrors } from "../utils/validateTaskForm";
 
-type TaskFormProps = {
+export type TaskFormProps = {
   title: string;
   onTitleChange: (value: string) => void;
   description: string;
