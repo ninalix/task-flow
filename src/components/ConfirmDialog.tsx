@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-type ConfirmDialogProps = {
+export type ConfirmDialogProps = {
   isOpen: boolean;
   title: string;
   message: string;
