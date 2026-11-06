@@ -45,6 +45,15 @@ const focusCases = [
   { field: "project", label: "Project", role: "combobox"},
 ] as const;
 
+const mockProjects = [
+  {
+    id: 1,
+    name: "IP Australia",
+    description: "Navigator project",
+    status: "active" as const
+  }
+];
+
 function renderTaskForm(props: Partial<TaskFormProps> = {}) {
   return render(
     <MemoryRouter>
@@ -354,4 +363,46 @@ test("cancel link points to tasks page", () => {
   });
 
   expect(cancelLink).toHaveAttribute("href", "/tasks");
+});
+
+test("renders projects and handles project and due date changes", async () => {
+  const user = userEvent.setup();
+
+  const onProjectChange = vi.fn();
+  const onDueDateChange = vi.fn();
+
+  renderTaskForm({
+    projects: mockProjects,
+    projectId: null,
+    dueDate: "",
+    onProjectChange,
+    onDueDateChange
+  });
+
+  // Projects render
+  const projectSelect = screen.getByRole("combobox", {
+    name: "Project"
+  });
+
+  expect(
+    screen.getByRole("option", {
+      name: "IP Australia"
+    })
+  ).toBeInTheDocument();
+
+  await user.selectOptions(projectSelect, "1");
+
+  expect(onProjectChange).toHaveBeenCalledWith(1);
+
+  // Due date
+  const dueDate = screen.getByLabelText("Due date");
+
+  await user.type(dueDate, "2026-12-31");
+
+  expect(onDueDateChange).toHaveBeenCalledWith("2026-12-31");
+
+  // None project
+  await user.selectOptions(projectSelect, "");
+
+  expect(onProjectChange).toHaveBeenCalledWith(null);
 });
