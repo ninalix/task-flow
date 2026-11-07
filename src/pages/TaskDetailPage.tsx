@@ -27,7 +27,7 @@ function TaskDetailPage() {
     return (
       <>
         <p role="alert">{error}</p>
-        <button onClick={fetchTask}>Try again</button>
+        <button onClick={() => fetchTask()}>Try again</button>
       </>
     )
   } else if(task === null) {
@@ -46,6 +46,8 @@ function TaskDetailPage() {
   }
 
   async function handleDelete() {
+    if(!task) return;
+    
     setDeleting(true);
     setDeleteError("");
 

@@ -52,6 +52,10 @@ function TaskForm({title, onTitleChange, description, onDescriptionChange, statu
       } else if(errors.project){
         projectRef.current?.focus();
       }
+
+      // Focus should only move after a failed submit,
+      // not whenever an individual validation error changes.
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submitAttempt]);
 
   return (

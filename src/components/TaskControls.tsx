@@ -26,7 +26,7 @@ function TaskControls({searchTerm, onSearchChange, statusFilter, onStatusFilterC
     projectState = 
       <>
         <p role="alert">{projectsError}</p>
-        <button onClick={fetchProjects}>Try again</button>
+        <button onClick={() => fetchProjects()}>Try again</button>
       </>
   }
 
