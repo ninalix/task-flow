@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { Task } from "../types";
 
 function useTasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  async function fetchTasks() {
+  const fetchTasks = useCallback(async () => {
     setLoading(true);
     setError("");
 
@@ -28,11 +28,13 @@ function useTasks() {
     } finally {
       setLoading(false);
     }
-  }
+  }, []);
 
   useEffect(() => {
+    // Initial data fetching intentionally updates loading state.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchTasks();
-  }, []);
+  }, [fetchTasks]);
 
   return {
     tasks,

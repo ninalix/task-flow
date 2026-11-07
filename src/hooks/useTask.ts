@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { Task } from "../types";
 
 function useTask(id: string | undefined) {
@@ -7,7 +7,7 @@ function useTask(id: string | undefined) {
   const [error, setError] = useState("");
   const [notFound, setNotFound] = useState(false);
 
-  async function fetchTask() {
+  const fetchTask = useCallback(async (signal?: AbortSignal) => {
     if(!id) {
       setLoading(false);
       setError("");
@@ -23,7 +23,9 @@ function useTask(id: string | undefined) {
     setTask(null);
 
     try {
-      const response = await fetch(`http://localhost:3000/tasks/${id}`);
+      const response = await fetch(`http://localhost:3000/tasks/${id}`, {
+        signal
+      });
 
       if(response.status === 404) {
         setNotFound(true);
@@ -35,21 +37,38 @@ function useTask(id: string | undefined) {
       }
 
       const data: Task = await response.json();
+
+      if (signal?.aborted) return;
+
       setTask(data);
     } catch(error) {
+      if(signal?.aborted) {
+        return;
+      }
+
       if(error instanceof Error) {
         setError(error.message);
       } else {
         setError("Something went wrong.");
       }
     } finally {
-      setLoading(false);
+      if(!signal?.aborted) {
+        setLoading(false);
+      }
     }
-  }
+  }, [id]);
 
   useEffect(() => {
-    fetchTask();
-  }, [id]);
+    const controller = new AbortController();
+
+    // Initial fetch intentionally updates request state.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchTask(controller.signal);
+
+    return () => {
+      controller.abort();
+    }
+  }, [fetchTask]);
 
   return {task, error, loading, notFound, fetchTask};
 }
