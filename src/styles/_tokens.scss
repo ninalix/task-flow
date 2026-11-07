@@ -1,0 +1,93 @@
+/**
+ * TaskFlow Design Tokens
+ *
+ * Global design values based on the Figma Style Guide.
+ * Shared across components to maintain visual consistency.
+ */
+
+:root {
+  // ----------------------------------------
+  // Colours
+  // ----------------------------------------
+
+  // Surfaces
+  --color-background: #f6f1e8;
+  --color-surface: #fffcf7;
+
+  // Text
+  --color-text: #25211e;
+  --color-text-muted: #6d655d;
+
+  // Brand
+  --color-primary: #c43d28;
+  --color-primary-hover: #9f2f20;
+
+  // Borders
+  --color-border-subtle: #d8cec1;
+  --color-border-control: #81786f;
+
+  // Semantic colours
+  --color-success: #35644e;
+  --color-danger: #a1282b;
+  --color-warning: #8a5a16;
+  --color-focus: #245b46;
+
+  // ----------------------------------------
+  // Typography
+  // ----------------------------------------
+
+  // Font families
+  --font-display: "DM Serif Display", Georgia, serif;
+  --font-body: "Inter", Arial, sans-serif;
+
+  // Font size
+  --font-size-display-xl: 56px;
+  --font-size-display-l: 40px;
+  --font-size-heading-m: 24px;
+  --font-size-heading-s: 18px;
+  --font-size-body: 16px;
+  --font-size-body-sm: 14px;
+  --font-size-meta: 12px;
+
+  // Font weight
+  --font-weight-semibold: 600;
+  --font-weight-medium: 500;
+  --font-weight-regular: 400;
+
+  // Line height
+  --line-height-display-xl: 60px;
+  --line-height-display-l: 44px;
+  --line-height-heading-m: 32px;
+  --line-height-heading-s: 24px;
+  --line-height-regular: 20px;
+  --line-height-small: 16px;
+
+  // ----------------------------------------
+  // Spacing
+  // Base unit: 4px
+  // ----------------------------------------
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  // ----------------------------------------
+  // Border Radius
+  // ----------------------------------------
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  // ----------------------------------------
+  // Border width
+  // ----------------------------------------
+
+  --border-subtle: 1px;
+  --border-control: 1px;
+  --border-focus: 2px;
+}
