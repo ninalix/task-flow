@@ -9,11 +9,24 @@ type TaskListProps = {
 
 function TaskList({tasks, projects}: TaskListProps) {
   return (
-    <ul className="task-list">
-      {tasks.map(task => (
-        <TaskItem key={task.id} task={task} projects={projects} />
-      ))}
-    </ul>
+    <div className="task-table-wrapper">
+      <table className="task-table">
+        <thead>
+          <tr>
+            <th scope="col">Task</th>
+            <th scope="col">Project</th>
+            <th scope="col">Status</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Due date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tasks.map(task => (
+            <TaskItem key={task.id} task={task} projects={projects} />
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
