@@ -1,0 +1,113 @@
+.task-item {
+  border-bottom: var(--border-subtle) solid var(--color-border-subtle);
+
+  &__link {
+    display: grid;
+    grid-template-columns:
+      minmax(0, 3fr)
+      minmax(110px, 1fr)
+      minmax(90px, 0.8fr)
+      minmax(110px, 0.8fr);
+    align-items: center;
+    gap: var(--space-4);
+
+    min-height: 72px;
+    padding: var(--space-4) var(--space-3);
+
+    color: var(--color-text);
+    text-decoration: none;
+
+    transition: background-color 150ms ease;
+
+    &:hover {
+      background-color: var(--color-darker-bg);
+    }
+
+    &:focus-visible {
+      outline: var(--border-focus) solid var(--color-focus);
+      outline-offset: -2px;
+    }
+  }
+
+  &__title {
+    min-width: 0;
+
+    h2 {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: var(--font-size-body-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--line-height-regular);
+      overflow-wrap: anywhere;
+    }
+  }
+
+  &__status,
+  &__priority,
+  &__date {
+    font-size: var(--font-size-body-sm);
+    line-height: var(--line-height-regular);
+  }
+
+  &__status {
+    color: var(--color-text-muted);
+    text-transform: capitalize;
+
+    &--in-progress {
+      color: var(--color-primary);
+    }
+
+    &--done {
+      color: var(--color-success);
+    }
+  }
+
+  &__priority {
+    text-transform: capitalize;
+
+    &--critical {
+      color: var(--color-danger);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    &--high {
+      color: var(--color-primary);
+    }
+
+    &--medium {
+      color: var(--color-warning);
+    }
+
+    &--low {
+      color: var(--color-text-muted);
+    }
+  }
+
+  &__date {
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 1000px) {
+    &__link {
+      grid-template-columns: minmax(0, 2fr) minmax(100px, 1fr);
+      gap: var(--space-2) var(--space-4);
+    }
+  }
+
+  @media (max-width: 480px) {
+    &__link {
+      grid-template-columns: minmax(0, 1fr) auto;
+      padding-inline: var(--space-2);
+    }
+
+    &__title {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__link {
+      transition: none;
+    }
+  }
+}

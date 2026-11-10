@@ -1,0 +1,99 @@
+
+/* ========================================
+   TaskFlow — Buttons
+   ======================================== */
+
+// Base
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+
+  min-height: 44px;
+  padding: var(--space-3) var(--space-4);
+
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-regular);
+  text-align: center;
+  text-decoration: none;
+
+  border: var(--border-control) solid transparent;
+  border-radius: var(--radius-sm);
+
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+
+  &:focus-visible {
+    outline: var(--border-focus) solid var(--color-focus);
+    outline-offset: 3px;
+  }
+
+  &:disabled,
+  &[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:disabled {
+    pointer-events: none;
+  }
+}
+
+// Primary — main actions
+.button-primary {
+  background-color: var(--color-primary);
+  color: #fff;
+
+  &:hover:not(:disabled):not([aria-disabled="true"]) {
+    background-color: var(--color-primary-hover);
+  }
+}
+
+// Secondary — alternative actions
+.button-secondary {
+  background-color: transparent;
+  color: var(--color-text);
+  border-color: var(--color-border-control);
+
+  &:hover:not(:disabled):not([aria-disabled="true"]) {
+    background-color: var(--color-darker-bg);
+    border-color: var(--color-text);
+  }
+}
+
+// Danger — destructive actions
+.button-danger {
+  background-color: var(--color-danger);
+  color: #fff;
+
+  &:hover:not(:disabled):not([aria-disabled="true"]) {
+    background-color: #801f23;
+  }
+}
+
+// Loading
+.button-loading {
+  cursor: wait;
+
+  &[aria-disabled="true"] {
+    opacity: 0.7;
+  }
+}
+
+// Full width
+.button-full {
+  width: 100%;
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}

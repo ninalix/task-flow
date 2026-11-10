@@ -1,21 +1,21 @@
 {
   "projects": [
     {
-      "id": "1",
+      "id": 1,
       "name": "IP Australia IP First Response",
       "description": "A digital guidance tool that helps users understand intellectual property options based on their situation and existing rights.",
       "deadline": "2026-12-31",
       "status": "active"
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Administrative Review Tribunal",
       "description": "Enhancement and accessibility work for reusable content components across the ART website.",
       "deadline": "2027-02-17",
       "status": "active"
     },
     {
-      "id": "3",
+      "id":3,
       "name": "ATO Essentials to Strengthen Your Small Business",
       "description": "An accessible online learning experience providing practical guidance and resources for small business owners.",
       "status": "completed"

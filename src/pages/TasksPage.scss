@@ -1,0 +1,69 @@
+// ========================================
+// Tasks Page
+// ========================================
+
+.tasks-page {
+  width: 100%;
+  min-width: 0;
+}
+
+.tasks-page {
+  width: 100%;
+  min-width: 0;
+
+  .page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-6);
+    border-bottom: var(--border-subtle) solid var(--color-border-subtle);
+  }
+
+  .page-heading {
+    min-width: 0;
+
+    h1 {
+      margin: 0;
+      color: var(--color-text);
+      text-align: left;
+    }
+
+    p {
+      margin: var(--space-2) 0 0;
+      font-size: var(--font-size-body-sm);
+      color: var(--color-text-muted);
+    }
+  }
+
+  .create-task-link {
+    padding: 0 var(--space-4);
+  }
+
+  @media (max-width: 768px) {
+    .page-header {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .create-task-link {
+      align-self: flex-start;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .create-task-link {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .create-task-link {
+      transition: none;
+    }
+  }
+}
