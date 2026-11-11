@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { test, expect } from "vitest";
 import TaskItem from "./TaskItem";
-import type { Task } from "../types";
+import type { Task, Project } from "../types";
 
 const task: Task = {
   id: 101,
@@ -18,10 +18,29 @@ const taskWithDueDate: Task = {
   dueDate: "2026-12-31"
 };
 
+const mockProjects: Project[] = [
+  {
+    id: 1,
+    name: "IP Australia",
+    description: "Navigator project",
+    status: "active",
+  },
+  {
+    id: 2,
+    name: "ART",
+    description: "Tribunal project",
+    status: "active",
+  },
+];
+
 function renderTaskItem(task: Task) {
   return render(
     <MemoryRouter>
-      <TaskItem task={task}/>
+      <table>
+        <tbody>
+          <TaskItem task={task} projects={mockProjects}/>
+        </tbody>
+      </table>
     </MemoryRouter>
   );
 }
@@ -34,9 +53,8 @@ test("displays the task title", () => {
 
   // Assert
   expect(
-    screen.getByRole("heading", {
+    screen.getByRole("rowheader", {
       name: "Fix accessibility issue",
-      level: 2,
     })
   ).toBeInTheDocument();
 });
@@ -91,5 +109,13 @@ test("displays due date when provided", () => {
 
   expect(
     screen.getByText("2026-12-31")
+  ).toBeInTheDocument();
+});
+
+test("displays the associated project name", () => {
+  renderTaskItem(task);
+
+  expect(
+    screen.getByRole("cell", { name: "IP Australia" })
   ).toBeInTheDocument();
 });

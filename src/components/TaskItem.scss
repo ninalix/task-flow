@@ -1,0 +1,96 @@
+.task-item {
+  position: relative;
+  transition: background-color 150ms ease;
+  border-left: 2px solid transparent;
+
+  &:hover {
+    background: var(--color-background-hover);
+    border-left: 2px solid var(--color-primary);
+  }
+
+  &:focus-within {
+    background: var(--color-darker-bg);
+  }
+
+  &__link {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+
+    // Expand the clickable area to the entire table row
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      cursor: pointer;
+    }
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  // Visible keyboard focus for the entire row
+  &:has(.task-item__link:focus-visible) {
+    outline: 2px solid var(--color-focus);
+    outline-offset: -2px;
+  }
+
+  &__project {
+    color: var(--color-text-muted);
+  }
+
+  &__status,
+  &__priority {
+    text-transform: capitalize;
+    font-weight: var(--font-weight-medium);
+  }
+
+  &__status {
+    &--backlog {
+      color: var(--color-text-muted);
+    }
+
+    &--todo {
+      color: var(--color-warning);
+    }
+
+    &--in-progress {
+      color: var(--color-primary);
+    }
+
+    &--done {
+      color: var(--color-success);
+    }
+  }
+
+  &__priority {
+    &--critical {
+      color: var(--color-danger);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    &--high {
+      color: var(--color-primary);
+    }
+
+    &--medium {
+      color: var(--color-warning);
+    }
+
+    &--low {
+      color: var(--color-text-muted);
+    }
+  }
+
+  &__date {
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .task-item {
+    transition: none;
+  }
+}

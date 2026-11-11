@@ -1,0 +1,110 @@
+// ========================================
+// Typography
+// ========================================
+
+// Base
+body {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text);
+}
+
+// Headings
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-regular);
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-semibold);
+}
+
+// Display Typography
+h1,
+.text-display-xl {
+  font-family: var(--font-display);
+  font-size: var(--font-size-display-xl);
+  line-height: var(--line-height-display-xl);
+  font-weight: var(--font-weight-regular);
+}
+
+h2,
+.text-display-l {
+  font-family: var(--font-display);
+  font-size: var(--font-size-display-l);
+  line-height: var(--line-height-display-l);
+  font-weight: var(--font-weight-regular);
+}
+
+// Heading Typography
+h3,
+.text-heading-m {
+  font-family: var(--font-body);
+  font-size: var(--font-size-heading-m);
+  line-height: var(--line-height-heading-m);
+  font-weight: var(--font-weight-semibold);
+}
+
+h4,
+.text-heading-s {
+  font-family: var(--font-body);
+  font-size: var(--font-size-heading-s);
+  line-height: var(--line-height-heading-s);
+  font-weight: var(--font-weight-semibold);
+}
+
+// Body Typography
+.text-body-regular {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-heading-s);
+}
+
+.text-body-small {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-regular);
+}
+
+.text-body-medium {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-medium);
+}
+
+.text-body-semibold {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-semibold);
+}
+
+// Utility
+.text-display {
+  font-family: var(--font-display);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 768px) {
+  h1,
+  .text-display-xl {
+    font-size: var(--font-size-display-l);
+    line-height: var(--line-height-display-l);
+  }
+}
