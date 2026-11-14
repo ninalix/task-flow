@@ -1,7 +1,30 @@
-@use "tokens";
-@use "layout";
-@use "typography";
-@use "base";
-@use "buttons";
+// Base
+@use "./base/tokens";
+@use "./base/typography";
+
+// Layout
+@use "./layout/layout";
+
+// Shared components
+@use "./components/buttons";
 @use "./components/badge";
 @use "./components/form-controls";
+
+// Pages
+@use "./pages/tasks";
+
+// Global styles
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-size: var(--font-size-body);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}

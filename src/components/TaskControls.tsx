@@ -1,5 +1,4 @@
 import type { Task, TaskSortOrder, Project } from "../types";
-import "./TaskControls.scss";
 
 type TaskControlsProps = {
   searchTerm: string;
