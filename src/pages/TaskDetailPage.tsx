@@ -2,6 +2,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import useTask from "../hooks/useTask";
 import { useRef, useState } from "react";
 import ConfirmDialog from "../components/ConfirmDialog";
+import Button from "../components/ui/Button";
 
 function TaskDetailPage() {
   const params = useParams();
@@ -79,7 +80,7 @@ function TaskDetailPage() {
       <p>Status: {task.status}</p>
       <p>Priority: {task.priority}</p>
       <p>Due date: {task.dueDate ?? "No due date"}</p>
-      <button ref={deleteRef} onClick={handleOpenDeleteDialog}>Delete</button>
+      <Button variant="primary" ref={deleteRef} onClick={handleOpenDeleteDialog}>Delete</Button>
       <Link to={`/tasks/${task.id}/edit`}>Edit task</Link>
       <Link to="/tasks">Back to tasks</Link>
       <ConfirmDialog 

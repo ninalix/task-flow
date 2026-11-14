@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import type { Task, Project } from "../types";
 import type { TaskFormErrors } from "../utils/validateTaskForm";
+import Input from "./ui/Input";
+import Select from "./ui/Select";
+import Textarea from "./ui/Textarea";
 
 export type TaskFormProps = {
   title: string;
@@ -60,70 +63,60 @@ function TaskForm({title, onTitleChange, description, onDescriptionChange, statu
 
   return (
     <form onSubmit={onSubmit} noValidate>
-      <div>
-        <label htmlFor="title">Title</label>
-        <input id="title" required 
-          ref={titleRef}
-          value={title} 
-          onChange={(e) => {
-            onTitleChange(e.target.value);
-            }}
-          aria-invalid={Boolean(errors.title)}
-          aria-describedby={errors.title ? "title-error" : undefined}
-        />
-        {errors.title && <p id="title-error">{errors.title}</p>}
-      </div>
-      <div>
-        <label htmlFor="description">Description</label>
-        <textarea id="description" required 
-          ref={descriptionRef}
-          value={description} 
-          onChange={(e) => {
-            onDescriptionChange(e.target.value);
-            }}
-          aria-invalid={Boolean(errors.description)}
-          aria-describedby={errors.description ? "description-error" : undefined}
-        />
-        {errors.description && <p id="description-error">{errors.description}</p>}
-      </div>
-      <div>
-        <label htmlFor="status">Status</label>
-        <select id="status" required 
-            ref={statusRef}
-            value={status} 
-            onChange={(e) => {
-              onStatusChange(e.target.value === "" ? "" : e.target.value as Task["status"]);
-              }}
-            aria-invalid={Boolean(errors.status)}
-            aria-describedby={errors.status ? "status-error": undefined}
-          >
-          <option value="">Select a status...</option>
-          <option value="backlog">Backlog</option>
-          <option value="todo">To do</option>
-          <option value="in-progress">In progress</option>
-          <option value="done">Done</option>
-        </select>
-        {errors.status && <p id="status-error">{errors.status}</p>}
-      </div>
-      <div>
-        <label htmlFor="priority">Priority</label>
-        <select id="priority" required 
-            ref={priorityRef}
-            value={priority} 
-            onChange={(e) => {
-              onPriorityChange(e.target.value === "" ? "" : e.target.value as Task["priority"]);
-            }}
-            aria-invalid={Boolean(errors.priority)}
-            aria-describedby={errors.priority ? "priority-error": undefined}
-          >
-          <option value="">Select a priority...</option>
-          <option value="critical">Critical</option>
-          <option value="high">High</option>
-          <option value="medium">Medium</option>
-          <option value="low">Low</option>
-        </select>
-        {errors.priority && <p id="priority-error">{errors.priority}</p>}
-      </div>
+      <Input 
+        id="title"
+        label="Title"
+        required
+        ref={titleRef}
+        value={title} 
+        onChange={(e) => onTitleChange(e.target.value)}
+        error={errors.title}
+      />
+      <Textarea 
+        id="description"
+        label="Description"
+        required
+        ref={descriptionRef}
+        value={description} 
+        onChange={(e) => onDescriptionChange(e.target.value)}
+        error={errors.description}
+        rows={5}
+      />
+      <Select 
+        id="status"
+        label="Status"
+        required
+        ref={statusRef}
+        value={status} 
+        onChange={(e) => {
+          onStatusChange(e.target.value === "" ? "" : e.target.value as Task["status"]);
+          }}
+        error={errors.status}
+      >
+        <option value="">Select a status...</option>
+        <option value="backlog">Backlog</option>
+        <option value="todo">To do</option>
+        <option value="in-progress">In progress</option>
+        <option value="done">Done</option>
+      </Select>
+      <Select
+        id="priority"
+        label="Priority"
+        required
+        ref={priorityRef}
+        value={priority} 
+        onChange={(e) => {
+          onPriorityChange(e.target.value === "" ? "" : e.target.value as Task["priority"]);
+        }}
+        error={errors.priority}
+      >
+        <option value="">Select a priority...</option>
+        <option value="critical">Critical</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </Select>
+      
       {projectsLoading ? (
         <p>Loading projects...</p>
       ) : projectsError ? (
@@ -132,24 +125,22 @@ function TaskForm({title, onTitleChange, description, onDescriptionChange, statu
           <button type="button" onClick={fetchProjects}>Try again</button>
         </>
       ) : (
-        <div>
-          <label htmlFor="project">Project</label>
-          <select id="project" required 
-              ref={projectRef}
-              value={projectId ?? ""} 
-              onChange={(e) => {
-                onProjectChange(e.target.value === "" ? null : Number(e.target.value));
-                }}
-              aria-invalid={Boolean(errors.project)}
-              aria-describedby={errors.project ? "project-error": undefined}
-            >
-            <option value="">Select a project...</option>
+        <Select
+          id="project"
+          label="Project"
+          required
+          ref={projectRef}
+          value={projectId ?? ""} 
+          onChange={(e) => {
+            onProjectChange(e.target.value === "" ? null : Number(e.target.value));
+            }}
+          error={errors.project}
+        >
+          <option value="">Select a project...</option>
             {projects.map(project => (
               <option key={project.id} value={project.id}>{project.name}</option>
             ))}
-          </select>
-          {errors.project && <p id="project-error">{errors.project}</p>}
-        </div>
+        </Select>
       )}
       
       <div>
