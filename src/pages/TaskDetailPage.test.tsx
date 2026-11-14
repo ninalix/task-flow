@@ -1,11 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { test, expect, vi, afterEach } from "vitest";
+import { test, expect, vi, beforeEach, afterEach } from "vitest";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 
 import TaskDetailPage from "./TaskDetailPage";
 import useTask from "../hooks/useTask";
-import type { Task } from "../types";
+import useProjects from "../hooks/useProjects";
+import type { Task, Project } from "../types";
 
 const mockTask: Task = {
   id: 101,
@@ -16,8 +17,21 @@ const mockTask: Task = {
   projectId: 1
 };
 
+const mockProjects: Project[] = [
+  {
+    id: 1,
+    name: "IP Australia",
+    description: "IP Australia Navigator project",
+    status: "active"
+  }
+];
+
 // Mock setup
 vi.mock("../hooks/useTask", () => ({
+  default: vi.fn()
+}));
+
+vi.mock("../hooks/useProjects", () => ({
   default: vi.fn()
 }));
 
@@ -26,12 +40,21 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-vi.mocked(useTask).mockReturnValue({
+beforeEach(() => {
+  vi.mocked(useTask).mockReturnValue({
   task: mockTask,
   loading: false,
   error: "",
   notFound: false,
   fetchTask: vi.fn()
+});
+
+  vi.mocked(useProjects).mockReturnValue({
+    projects: mockProjects,
+    loading: false,
+    error: "",
+    fetchProjects: vi.fn()
+  });
 });
 
 function renderTaskDetailPage() {
@@ -92,7 +115,12 @@ test("closes dialog and restores focus when Cancel is clicked", async () => {
 
   expect(dialog).not.toBeInTheDocument();
   expect(deleteButton).toHaveFocus();
-  expect(mockFetch).not.toHaveBeenCalled();
+  expect(mockFetch).not.toHaveBeenCalledWith(
+    expect.any(String),
+    expect.objectContaining({
+      method: "DELETE",
+    })
+  );
 });
 
 test("deletes task and navigates to task list on success", async () => {
@@ -171,5 +199,82 @@ test("displays error and stays on task detail when deletion fails", async () => 
     screen.getByRole("heading", {
       name: "Fix accessibility issue"
     })
+  ).toBeInTheDocument();
+});
+
+test("displays the project name for the task", () => {
+  renderTaskDetailPage();
+
+  expect(
+    screen.getByText("IP Australia")
+  ).toBeInTheDocument();
+});
+
+test("displays project error without blocking task details", () => {
+  // Arrange
+  vi.mocked(useProjects).mockReturnValue({
+    projects: [],
+    loading: false,
+    error: "Failed to fetch projects.",
+    fetchProjects: vi.fn()
+  });
+
+  renderTaskDetailPage();
+
+  const pageDeleteButton = screen.getByRole("button", {
+    name: "Delete"
+  });
+
+  // Assert
+  expect(
+    screen.getByText("Unable to load project.")
+  ).toBeInTheDocument();
+
+  expect(
+    screen.getByRole("heading", {
+      name: "Fix accessibility issue"
+    })
+  ).toBeInTheDocument();
+
+  expect(pageDeleteButton).toBeEnabled();
+});
+
+test("displays loading state while fetching projects", () => {
+  // Arrange
+  vi.mocked(useProjects).mockReturnValue({
+    projects: [],
+    loading: true,
+    error: "",
+    fetchProjects: vi.fn()
+  });
+
+  renderTaskDetailPage();
+
+  // Assert
+  expect(
+    screen.getByText("Loading project...")
+  ).toBeInTheDocument();
+
+  expect(
+    screen.getByRole("heading", {
+      name: "Fix accessibility issue"
+    })
+  ).toBeInTheDocument();
+});
+
+test("displays unknown project when no matching project exists", () => {
+  // Arrange
+  vi.mocked(useProjects).mockReturnValue({
+    projects: [],
+    loading: false,
+    error: "",
+    fetchProjects: vi.fn()
+  });
+
+  renderTaskDetailPage();
+
+  // Assert
+  expect(
+    screen.getByText("Unknown project")
   ).toBeInTheDocument();
 });

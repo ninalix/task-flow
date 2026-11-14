@@ -5,6 +5,7 @@ import type { TaskFormErrors } from "../utils/validateTaskForm";
 import Input from "./ui/Input";
 import Select from "./ui/Select";
 import Textarea from "./ui/Textarea";
+import Button from "./ui/Button";
 
 export type TaskFormProps = {
   title: string;
@@ -148,8 +149,16 @@ function TaskForm({title, onTitleChange, description, onDescriptionChange, statu
         <input id="due-date" type="date" value={dueDate} onChange={(e) => onDueDateChange(e.target.value)}/>
       </div>
       <div>
-        <button type="submit" disabled={saving}>{saving ? savingLabel : submitLabel}</button>
         {saveError && <p role="alert">{saveError}</p>}
+      </div>
+      <div className="task-form__actions">
+        <Button
+          variant="primary"
+          type="submit"
+          disabled={saving}
+        >
+          {saving ? savingLabel : submitLabel}
+        </Button>
         <Link to="/tasks">Cancel</Link>
       </div>
     </form>

@@ -1,13 +1,17 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import useTask from "../hooks/useTask";
+import useProjects from "../hooks/useProjects";
 import { useRef, useState } from "react";
 import ConfirmDialog from "../components/ConfirmDialog";
 import Button from "../components/ui/Button";
+import Badge from "../components/ui/Badge";
+import { statusVariants, priorityVariants } from "../utils/taskVariants";
 
 function TaskDetailPage() {
   const params = useParams();
   const navigate = useNavigate();
   const {task, loading, error, notFound, fetchTask} = useTask(params.id);
+  const {projects, loading: projectsLoading, error: projectsError} = useProjects();
 
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
@@ -34,6 +38,18 @@ function TaskDetailPage() {
   } else if(task === null) {
     return <p>No task found.</p>;
   } 
+
+  const project = projects.find((project) => Number(project.id) === task.projectId);
+
+  let projectContent: string;
+
+  if (projectsLoading) {
+    projectContent = "Loading project...";
+  } else if (projectsError) {
+    projectContent = "Unable to load project.";
+  } else {
+    projectContent = project?.name ?? "Unknown project";
+  }
 
   function handleOpenDeleteDialog() {
     setDeleteDialogOpen(true);
@@ -74,15 +90,62 @@ function TaskDetailPage() {
   }
 
   return (
-    <>
-      <h1>{task.title}</h1>
-      <p>{task.description}</p>
-      <p>Status: {task.status}</p>
-      <p>Priority: {task.priority}</p>
-      <p>Due date: {task.dueDate ?? "No due date"}</p>
-      <Button variant="primary" ref={deleteRef} onClick={handleOpenDeleteDialog}>Delete</Button>
-      <Link to={`/tasks/${task.id}/edit`}>Edit task</Link>
-      <Link to="/tasks">Back to tasks</Link>
+    <div className="task-detail">
+      <Link to="/tasks" className="task-detail__back">← Back to tasks</Link>
+      <div className="task-detail__header">
+        <div className="task-detail__heading">
+          <h1>{task.title}</h1>
+
+          <div className="task-detail__badges">
+            <Badge variant={statusVariants[task.status]}>
+              {task.status.replace("-", " ")}
+            </Badge>
+            <Badge variant={priorityVariants[task.priority]}>
+              {task.priority}
+            </Badge>
+          </div>
+        </div>
+
+        <Link
+          to={`/tasks/${task.id}/edit`}
+          className="button button-primary"
+        >
+          Edit task
+        </Link>
+      </div>
+
+      <section className="task-detail__panel">
+        <h2>Task details</h2>
+
+        <div className="task-detail__description">
+          <h3>Description</h3>
+          <p>{task.description}</p>
+        </div>
+
+        <dl className="task-detail__metadata">
+          <div className="task-detail__field">
+            <dt>Project</dt>
+            <dd>
+              {projectContent}
+            </dd>
+          </div>
+          <div className="task-detail__field">
+            <dt>Due date</dt>
+            <dd>{task.dueDate ?? "No due date"}</dd>
+          </div>
+        </dl>
+      </section>
+
+      <div className="task-detail__actions">
+        <Button
+          variant="danger"
+          ref={deleteRef}
+          onClick={handleOpenDeleteDialog}
+        >
+          Delete
+        </Button>
+      </div>
+      
       <ConfirmDialog 
         isOpen={deleteDialogOpen}
         title="Delete task?"
@@ -94,7 +157,7 @@ function TaskDetailPage() {
         onConfirm={handleDelete}
         onClose={handleCloseDeleteDialog}
       />
-    </>
+    </div>
   );
 }
 
