@@ -8,6 +8,26 @@ type TaskItemProps = {
   projects: Project[];
 }
 
+const statusVariants: Record<
+  Task["status"], 
+  NonNullable<BadgeProps["variant"]>
+> = {
+  backlog: "neutral",
+  todo: "neutral",
+  "in-progress": "warning",
+  done: "success",
+};
+
+const priorityVariants: Record<
+  Task["priority"], 
+  NonNullable<BadgeProps["variant"]>
+> = {
+  critical: "danger",
+  high: "warning",
+  medium: "neutral",
+  low: "neutral"
+};
+
 function TaskItem({ task, projects }: TaskItemProps) {
   const project = projects.find((project) => Number(project.id) === task.projectId);
 
