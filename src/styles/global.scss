@@ -1,7 +1,15 @@
+// Base
 @use "./base/tokens";
-@use "./layout/layout";
 @use "./base/typography";
 @use "./base/base";
+
+// Layout
+@use "./layout/layout";
+
+// Shared components
 @use "./components/buttons";
 @use "./components/badge";
 @use "./components/form-controls";
+
+// Pages
+@use "./pages/tasks";

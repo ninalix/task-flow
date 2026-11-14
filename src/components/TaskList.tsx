@@ -1,6 +1,5 @@
 import type { Task, Project } from "../types"
 import TaskItem from "./TaskItem";
-import "./TaskList.scss";
 
 type TaskListProps = {
   tasks: Task[];
