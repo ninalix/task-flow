@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import type { Task, Project } from "../types";
 import type { TaskFormErrors } from "../utils/validateTaskForm";
+import Input from "./ui/Input";
 
 export type TaskFormProps = {
   title: string;
@@ -60,19 +61,14 @@ function TaskForm({title, onTitleChange, description, onDescriptionChange, statu
 
   return (
     <form onSubmit={onSubmit} noValidate>
-      <div>
-        <label htmlFor="title">Title</label>
-        <input id="title" required 
-          ref={titleRef}
-          value={title} 
-          onChange={(e) => {
-            onTitleChange(e.target.value);
-            }}
-          aria-invalid={Boolean(errors.title)}
-          aria-describedby={errors.title ? "title-error" : undefined}
-        />
-        {errors.title && <p id="title-error">{errors.title}</p>}
-      </div>
+      <Input 
+        id="title"
+        label="Title"
+        ref={titleRef}
+        value={title} 
+        onChange={(e) => onTitleChange(e.target.value)}
+        error={errors.title}
+      />
       <div>
         <label htmlFor="description">Description</label>
         <textarea id="description" required 
