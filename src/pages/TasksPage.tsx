@@ -5,7 +5,6 @@ import TaskList from "../components/TaskList";
 import useTasks from "../hooks/useTasks";
 import useProjects from "../hooks/useProjects";
 import TaskControls from "../components/TaskControls";
-import "./TasksPage.scss";
 
 function TasksPage() {
   const {tasks, loading: tasksLoading, error: tasksError, fetchTasks} = useTasks();
