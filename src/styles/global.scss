@@ -1,7 +1,7 @@
-@use "tokens";
-@use "layout";
-@use "typography";
-@use "base";
-@use "buttons";
+@use "./base/tokens";
+@use "./layout/layout";
+@use "./base/typography";
+@use "./base/base";
+@use "./components/buttons";
 @use "./components/badge";
 @use "./components/form-controls";
