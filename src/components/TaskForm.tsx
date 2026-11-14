@@ -4,6 +4,7 @@ import type { Task, Project } from "../types";
 import type { TaskFormErrors } from "../utils/validateTaskForm";
 import Input from "./ui/Input";
 import Select from "./ui/Select";
+import Textarea from "./ui/Textarea";
 
 export type TaskFormProps = {
   title: string;
@@ -65,27 +66,26 @@ function TaskForm({title, onTitleChange, description, onDescriptionChange, statu
       <Input 
         id="title"
         label="Title"
+        required
         ref={titleRef}
         value={title} 
         onChange={(e) => onTitleChange(e.target.value)}
         error={errors.title}
       />
-      <div>
-        <label htmlFor="description">Description</label>
-        <textarea id="description" required 
-          ref={descriptionRef}
-          value={description} 
-          onChange={(e) => {
-            onDescriptionChange(e.target.value);
-            }}
-          aria-invalid={Boolean(errors.description)}
-          aria-describedby={errors.description ? "description-error" : undefined}
-        />
-        {errors.description && <p id="description-error">{errors.description}</p>}
-      </div>
+      <Textarea 
+        id="description"
+        label="Description"
+        required
+        ref={descriptionRef}
+        value={description} 
+        onChange={(e) => onDescriptionChange(e.target.value)}
+        error={errors.description}
+        rows={5}
+      />
       <Select 
         id="status"
         label="Status"
+        required
         ref={statusRef}
         value={status} 
         onChange={(e) => {
@@ -102,6 +102,7 @@ function TaskForm({title, onTitleChange, description, onDescriptionChange, statu
       <Select
         id="priority"
         label="Priority"
+        required
         ref={priorityRef}
         value={priority} 
         onChange={(e) => {
@@ -127,6 +128,7 @@ function TaskForm({title, onTitleChange, description, onDescriptionChange, statu
         <Select
           id="project"
           label="Project"
+          required
           ref={projectRef}
           value={projectId ?? ""} 
           onChange={(e) => {

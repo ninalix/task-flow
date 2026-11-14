@@ -19,7 +19,8 @@
 
 // Shared form control styles
 .input,
-.select {
+.select,
+.textarea {
   width: 100%;
   box-sizing: border-box;
   min-height: 44px;
@@ -67,5 +68,15 @@
 
   &:disabled {
     cursor: not-allowed;
+  }
+}
+
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.6;
+
+  &::placeholder {
+    color: var(--color-text-muted);
   }
 }
