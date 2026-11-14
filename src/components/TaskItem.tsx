@@ -1,11 +1,33 @@
 import type { Task, Project } from "../types";
 import { Link } from "react-router-dom";
 import "./TaskItem.scss";
+import type { BadgeProps } from "./ui/Badge";
+import Badge from "./ui/Badge";
 
 type TaskItemProps = {
   task: Task;
   projects: Project[];
 }
+
+const statusVariants: Record<
+  Task["status"], 
+  NonNullable<BadgeProps["variant"]>
+> = {
+  backlog: "neutral",
+  todo: "neutral",
+  "in-progress": "warning",
+  done: "success",
+};
+
+const priorityVariants: Record<
+  Task["priority"], 
+  NonNullable<BadgeProps["variant"]>
+> = {
+  critical: "danger",
+  high: "warning",
+  medium: "neutral",
+  low: "neutral"
+};
 
 function TaskItem({ task, projects }: TaskItemProps) {
   const project = projects.find((project) => Number(project.id) === task.projectId);
@@ -20,11 +42,15 @@ function TaskItem({ task, projects }: TaskItemProps) {
       <td className="task-item__project">
         {project?.name ?? "Unknown project"}
       </td>
-      <td className={`task-item__status task-item__status--${task.status}`}>
-        {task.status.replace("-", " ")}
+      <td className="task-item__status">
+        <Badge variant={statusVariants[task.status]}>
+          {task.status.replace("-", " ")}
+        </Badge>
       </td>
-      <td className={`task-item__priority task-item__priority--${task.priority}`}>
-        {task.priority}
+      <td className="task-item__priority">
+        <Badge variant={priorityVariants[task.priority]}>
+          {task.priority}
+        </Badge>
       </td>
       <td className="task-item__date">
         {task.dueDate ?? "No due date"}
