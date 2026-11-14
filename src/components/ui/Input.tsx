@@ -41,7 +41,7 @@ function Input({
         aria-invalid={Boolean(error)}
         aria-describedby={finalDescribedBy}
       />
-      {error && <p id={`${id}-error`} className="form-field__error">{error}</p>}
+      {error && <p id={errorId} className="form-field__error">{error}</p>}
     </div>
   );
 }

@@ -17,7 +17,9 @@
   }
 }
 
-.input {
+// Shared form control styles
+.input,
+.select {
   width: 100%;
   box-sizing: border-box;
   min-height: 44px;
@@ -31,10 +33,6 @@
   background-color: var(--color-surface);
   border: 1px solid var(--color-border-control);
   border-radius: var(--radius-sm);
-
-  &::placeholder {
-    color: var(--color-text-muted);
-  }
 
   &:hover:not(:disabled) {
     border-color: var(--color-text);
@@ -52,6 +50,22 @@
   &:disabled {
     background-color: var(--color-darker-bg);
     color: var(--color-text-muted);
+    cursor: not-allowed;
+  }
+}
+
+// Input-specific styles
+.input {
+  &::placeholder {
+    color: var(--color-text-muted);
+  }
+}
+
+// Select-specific styles
+.select {
+  cursor: pointer;
+
+  &:disabled {
     cursor: not-allowed;
   }
 }
