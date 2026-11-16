@@ -11,6 +11,14 @@ type TaskItemProps = {
 function TaskItem({ task, projects }: TaskItemProps) {
   const project = projects.find((project) => Number(project.id) === task.projectId);
 
+  const formattedDate = task.dueDate
+  ? new Date(`${task.dueDate}T00:00:00`).toLocaleDateString("en-AU", {
+      day: "numeric",
+      month: "short",
+      year: "numeric"
+    })
+  : "No due date";
+
   return (
     <tr className="task-item">
       <th scope="row">
@@ -32,7 +40,7 @@ function TaskItem({ task, projects }: TaskItemProps) {
         </Badge>
       </td>
       <td className="task-item__date">
-        {task.dueDate ?? "No due date"}
+        {formattedDate ?? "No due date"}
       </td>
     </tr>
   );
