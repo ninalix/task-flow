@@ -108,7 +108,7 @@ test("displays due date when provided", () => {
   renderTaskItem(taskWithDueDate);
 
   expect(
-    screen.getByText("2026-12-31")
+    screen.getByText("31 Dec 2026")
   ).toBeInTheDocument();
 });
 
