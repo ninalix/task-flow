@@ -1,0 +1,203 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  min-width: 0;
+
+  // Page header
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-4);
+
+    h1 {
+      margin: 0 0 var(--space-2);
+    }
+
+    p {
+      margin: 0;
+      color: var(--color-text-muted);
+    }
+  }
+
+  // Section headings
+  &__section-title {
+    margin: 0 0 var(--space-4);
+    font-family: var(--font-body);
+    font-size: var(--font-size-heading-m);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-heading-m);
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    min-width: 0;
+  }
+
+  &__section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+
+    h2 {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: var(--font-size-heading-m);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--line-height-heading-m);
+    }
+  }
+
+  // Summary cards
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+
+  // Section links
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+
+    color: var(--color-primary);
+    font-size: var(--font-size-body-sm);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--color-primary-hover);
+      text-decoration: underline;
+    }
+
+    &:focus-visible {
+      outline: var(--border-focus) solid var(--color-focus);
+      outline-offset: 4px;
+    }
+  }
+
+  // Reusable TaskList
+  &__task-list {
+    min-width: 0;
+    overflow-x: auto;
+  }
+
+  // Reusable Project Cards
+  &__projects {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  // Empty and error states
+  &__empty {
+    padding: var(--space-8);
+    text-align: center;
+
+    background: var(--color-surface);
+    border: var(--border-subtle) solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+
+    p {
+      margin: 0;
+      color: var(--color-text-muted);
+    }
+  }
+
+  &__error {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+
+    p {
+      margin: 0;
+      color: var(--color-danger);
+    }
+  }
+
+  // Responsive
+  @media (max-width: 1200px) {
+    &__stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 900px) {
+    &__projects {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    gap: var(--space-6);
+
+    &__header {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 400px) {
+    &__stats {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+}
+
+// Individual summary card
+.dashboard-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+
+  padding: var(--space-4);
+
+  background: var(--color-surface);
+  border: var(--border-subtle) solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-2);
+
+    > span:first-child {
+      color: var(--color-text-muted);
+      font-size: var(--font-size-body-sm);
+      font-weight: var(--font-weight-medium);
+    }
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 36px;
+    height: 36px;
+
+    background: var(--color-background-hover);
+    color: var(--color-primary-hover);
+    border-radius: var(--radius-md);
+  }
+
+  &__value {
+    margin: 0;
+
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: var(--font-size-display-l);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-display-l);
+    font-variant-numeric: tabular-nums;
+  }
+}
