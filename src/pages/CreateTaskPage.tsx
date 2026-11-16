@@ -5,6 +5,7 @@ import useProjects from "../hooks/useProjects";
 import TaskForm from "../components/TaskForm";
 import validateTaskForm from "../utils/validateTaskForm";
 import type { TaskFormErrors } from "../utils/validateTaskForm";
+import TaskFormLayout from "../components/TaskFormLayout";
 
 function CreateTaskPage() {
   const [title, setTitle] = useState("");
@@ -43,7 +44,7 @@ function CreateTaskPage() {
 
     setErrors(validationErrors);
 
-    const hasError = Object.values(errors).some(error => error !== "");
+    const hasError = Object.values(validationErrors).some(error => error !== "");
 
     if(hasError) {
       setSubmitAttempt((count) => count + 1);
@@ -149,32 +150,38 @@ function CreateTaskPage() {
 
   return (
     <>
-      <h1>Create task</h1>
-      <TaskForm 
-        title={title}
-        onTitleChange={handleTitleChange}
-        description={description}
-        onDescriptionChange={handleDescriptionChange}
-        status={status}
-        onStatusChange={handleStatusChange}
-        priority={priority}
-        onPriorityChange={handlePriorityChange}
-        projectId={projectId}
-        onProjectChange={handleProjectChange}
-        dueDate={dueDate}
-        onDueDateChange={setDueDate}
-        projects={projects}
-        projectsLoading={projectsLoading}
-        projectsError={projectsError}
-        fetchProjects={fetchProjects}
-        errors={errors}
-        saving={saving}
-        saveError={saveError}
-        submitLabel="Create task"
-        savingLabel="Creating..."
-        onSubmit={handleSubmit}
-        submitAttempt={submitAttempt}
-      />
+      <TaskFormLayout
+        title="Create task"
+        description="Add a new task to your workspace."
+        backTo="/tasks"
+        backLabel="Back to tasks"
+      >
+        <TaskForm 
+          title={title}
+          onTitleChange={handleTitleChange}
+          description={description}
+          onDescriptionChange={handleDescriptionChange}
+          status={status}
+          onStatusChange={handleStatusChange}
+          priority={priority}
+          onPriorityChange={handlePriorityChange}
+          projectId={projectId}
+          onProjectChange={handleProjectChange}
+          dueDate={dueDate}
+          onDueDateChange={setDueDate}
+          projects={projects}
+          projectsLoading={projectsLoading}
+          projectsError={projectsError}
+          fetchProjects={fetchProjects}
+          errors={errors}
+          saving={saving}
+          saveError={saveError}
+          submitLabel="Create task"
+          savingLabel="Creating..."
+          onSubmit={handleSubmit}
+          submitAttempt={submitAttempt}
+        />
+      </TaskFormLayout>
     </>
   );
 }

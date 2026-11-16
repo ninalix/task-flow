@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import useTask from "../hooks/useTask";
 import useProjects from "../hooks/useProjects";
 import EditTaskForm from "../components/EditTaskForm";
+import TaskFormLayout from "../components/TaskFormLayout";
 
 function EditTaskPage() {
   const params = useParams();
@@ -38,15 +39,21 @@ function EditTaskPage() {
 
   return (
     <>
-      <h1>Edit task</h1>
-      <EditTaskForm 
-        key={task?.id}
-        task={task}
-        projects={projects}
-        projectsLoading={projectsLoading}
-        projectsError={projectsError}
-        fetchProjects={fetchProjects}
-      />
+      <TaskFormLayout
+        title="Edit task"
+        description="Update your task information."
+        backTo={`/tasks/${task.id}`}
+        backLabel="Back to task"
+      >
+        <EditTaskForm 
+          key={task.id}
+          task={task}
+          projects={projects}
+          projectsLoading={projectsLoading}
+          projectsError={projectsError}
+          fetchProjects={fetchProjects}
+        />
+      </TaskFormLayout>
     </>
   );
 }
