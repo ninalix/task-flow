@@ -5,6 +5,7 @@ import type { TaskFormErrors } from "../utils/validateTaskForm";
 import Input from "./ui/Input";
 import Select from "./ui/Select";
 import Textarea from "./ui/Textarea";
+import Button from "./ui/Button";
 
 export type TaskFormProps = {
   title: string;
@@ -62,7 +63,7 @@ function TaskForm({title, onTitleChange, description, onDescriptionChange, statu
   }, [submitAttempt]);
 
   return (
-    <form onSubmit={onSubmit} noValidate>
+    <form className="task-form" onSubmit={onSubmit} noValidate>
       <Input 
         id="title"
         label="Title"
@@ -82,75 +83,115 @@ function TaskForm({title, onTitleChange, description, onDescriptionChange, statu
         error={errors.description}
         rows={5}
       />
-      <Select 
-        id="status"
-        label="Status"
-        required
-        ref={statusRef}
-        value={status} 
-        onChange={(e) => {
-          onStatusChange(e.target.value === "" ? "" : e.target.value as Task["status"]);
-          }}
-        error={errors.status}
-      >
-        <option value="">Select a status...</option>
-        <option value="backlog">Backlog</option>
-        <option value="todo">To do</option>
-        <option value="in-progress">In progress</option>
-        <option value="done">Done</option>
-      </Select>
-      <Select
-        id="priority"
-        label="Priority"
-        required
-        ref={priorityRef}
-        value={priority} 
-        onChange={(e) => {
-          onPriorityChange(e.target.value === "" ? "" : e.target.value as Task["priority"]);
-        }}
-        error={errors.priority}
-      >
-        <option value="">Select a priority...</option>
-        <option value="critical">Critical</option>
-        <option value="high">High</option>
-        <option value="medium">Medium</option>
-        <option value="low">Low</option>
-      </Select>
-      
-      {projectsLoading ? (
-        <p>Loading projects...</p>
-      ) : projectsError ? (
-        <>
-          <p role="alert">{projectsError}</p>
-          <button type="button" onClick={fetchProjects}>Try again</button>
-        </>
-      ) : (
-        <Select
-          id="project"
-          label="Project"
+
+      <div className="task-form__grid">
+        <Select 
+          id="status"
+          label="Status"
           required
-          ref={projectRef}
-          value={projectId ?? ""} 
+          ref={statusRef}
+          value={status} 
           onChange={(e) => {
-            onProjectChange(e.target.value === "" ? null : Number(e.target.value));
+            onStatusChange(e.target.value === "" ? "" : e.target.value as Task["status"]);
             }}
-          error={errors.project}
+          error={errors.status}
         >
-          <option value="">Select a project...</option>
-            {projects.map(project => (
-              <option key={project.id} value={project.id}>{project.name}</option>
-            ))}
+          <option value="">Select a status...</option>
+          <option value="backlog">Backlog</option>
+          <option value="todo">To do</option>
+          <option value="in-progress">In progress</option>
+          <option value="done">Done</option>
         </Select>
-      )}
-      
-      <div>
-        <label htmlFor="due-date">Due date</label>
-        <input id="due-date" type="date" value={dueDate} onChange={(e) => onDueDateChange(e.target.value)}/>
+        <Select
+          id="priority"
+          label="Priority"
+          required
+          ref={priorityRef}
+          value={priority} 
+          onChange={(e) => {
+            onPriorityChange(e.target.value === "" ? "" : e.target.value as Task["priority"]);
+          }}
+          error={errors.priority}
+        >
+          <option value="">Select a priority...</option>
+          <option value="critical">Critical</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </Select>
+        
+        <div className="task-form__project">
+          {projectsLoading ? (
+            <p role="status">Loading projects...</p>
+          ) : projectsError ? (
+            <div className="task-form__project-error">
+              <p role="alert">{projectsError}</p>
+
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={fetchProjects}
+              >
+                Try again
+              </Button>
+            </div>
+          ) : (
+            <Select
+              id="project"
+              label="Project"
+              required
+              ref={projectRef}
+              value={projectId ?? ""}
+              onChange={(e) => {
+                onProjectChange(
+                  e.target.value === ""
+                    ? null
+                    : Number(e.target.value)
+                );
+              }}
+              error={errors.project}
+            >
+              <option value="">Select a project...</option>
+
+              {projects.map(project => (
+                <option key={project.id} value={project.id}>
+                  {project.name}
+                </option>
+              ))}
+            </Select>
+          )}
+        </div>
+        
+        <Input
+          id="due-date"
+          label="Due date"
+          type="date"
+          value={dueDate}
+          onChange={(e) => onDueDateChange(e.target.value)}
+        />
       </div>
-      <div>
-        <button type="submit" disabled={saving}>{saving ? savingLabel : submitLabel}</button>
-        {saveError && <p role="alert">{saveError}</p>}
-        <Link to="/tasks">Cancel</Link>
+      
+      {saveError && (
+        <p className="task-form__save-error" role="alert">
+          {saveError}
+        </p>
+      )}
+
+      <div className="task-form__actions">
+        <Link
+          to="/tasks"
+          className="button button-secondary"
+        >
+          Cancel
+        </Link>
+
+        <Button
+          variant="primary"
+          type="submit"
+          disabled={saving}
+        >
+          {saving ? savingLabel : submitLabel}
+        </Button>
       </div>
     </form>
   );
