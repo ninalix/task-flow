@@ -1,75 +1,208 @@
-# React + TypeScript + Vite
+# TaskFlow
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**An accessible task and project management dashboard built with React and TypeScript.**
 
-Currently, two official plugins are available:
+TaskFlow is a frontend portfolio project focused on building maintainable, accessible, and user-friendly web applications using modern React development practices.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The application allows users to manage tasks across multiple projects, track progress, and organise work through a responsive dashboard.
 
-## React Compiler
+![TaskFlow Dashboard](docs/screenshots/dashboard.png)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+### Dashboard
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- View task statistics, including total, in-progress, and completed tasks
+- Track the number of active projects
+- View upcoming tasks sorted by due date
+- Quickly navigate to tasks and projects
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Task Management
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Create, view, edit, and delete tasks
+- Assign tasks to projects
+- Manage task status, priority, and due dates
+- Search, filter, sort, and paginate tasks
+- View individual task details
+- Handle loading, error, and empty states
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+![Task List](docs/screenshots/tasks.png)
 
+### Project Management
+
+- Browse projects and view project details
+- Track project status and due dates
+- View tasks associated with each project
+- Navigate between projects and their tasks
+
+### Accessibility
+
+Accessibility is a core consideration throughout the application.
+
+Implemented features include:
+
+- Semantic HTML and accessible form controls
+- Keyboard navigation and visible focus indicators
+- Accessible form validation and error messages
+- Focus management for form errors and confirmation dialogs
+- Accessible loading, error, and empty states
+- Reduced-motion support
+- Responsive navigation and layouts
+
+The application follows WCAG accessibility principles, with further manual accessibility testing planned.
+
+## Tech Stack
+
+| Category      | Technologies                              |
+| ------------- | ----------------------------------------- |
+| Frontend      | React 19, TypeScript 6, Vite 8            |
+| Routing       | React Router 7                            |
+| Styling       | SCSS, CSS Custom Properties               |
+| UI Components | Reusable React components, Lucide React   |
+| API           | REST API, JSON Server                     |
+| Testing       | Vitest, React Testing Library, User Event |
+| Code Quality  | ESLint                                    |
+| CI            | GitHub Actions                            |
+
+## Architecture & Technical Decisions
+
+The application uses a component-based architecture with separation between UI components, pages, custom hooks, and utility functions.
+
+### Reusable Components
+
+Shared components such as buttons, form controls, badges, confirmation dialogs, task lists, and project cards promote consistency and maintainability.
+
+### Custom Hooks
+
+Custom hooks encapsulate data-fetching logic and related loading and error states, keeping page components focused on presentation and user interactions.
+
+### State Management
+
+React hooks manage local application state, while derived values are used for task filtering, sorting, and dashboard statistics.
+
+This reduces unnecessary state duplication and keeps the application logic easier to maintain.
+
+### Client-Side Routing
+
+React Router provides navigation between the dashboard, task lists, task details, task forms, and project pages.
+
+### Design System
+
+The UI uses SCSS and CSS custom properties to define reusable design tokens for colours, typography, spacing, borders, and focus styles.
+
+This provides a consistent visual language across the application.
+
+## Testing
+
+TaskFlow uses **Vitest** and **React Testing Library** to test component behaviour and user interactions.
+
+Tests cover areas such as:
+
+- Task form validation
+- Task item rendering
+- Confirmation dialog interactions
+- Task detail page behaviour
+
+Run tests in watch mode:
+
+```bash
+npm test
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Run all tests once:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm run test:run
 ```
+
+## Continuous Integration
+
+A GitHub Actions CI workflow runs automated quality checks on pushes and pull requests.
+
+The workflow includes:
+
+1. Install dependencies with `npm ci`
+2. Run ESLint
+3. Execute automated tests
+4. Run the TypeScript checks and production build
+
+These checks help identify issues before changes are merged into the main branch.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 22.12+ or a compatible newer version
+- npm
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/ninalix/task-flow.git
+cd task-flow
+```
+
+Install dependencies:
+
+```bash
+npm ci
+```
+
+### Start the Mock API
+
+TaskFlow uses JSON Server to simulate a REST API with data stored in `db.json`.
+
+Open a terminal and run:
+
+```bash
+npm run server
+```
+
+By default, the API is available at:
+
+`http://localhost:3000`
+
+### Start the Frontend
+
+Open a second terminal and run:
+
+```bash
+npm run dev
+```
+
+Vite will display the local development URL, typically:
+
+`http://localhost:5173`
+
+Open the URL in your browser to use TaskFlow.
+
+**Note:** Both the frontend development server and JSON Server must be running for data-dependent features to work.
+
+## Available Scripts
+
+| Command            | Description                                         |
+| ------------------ | --------------------------------------------------- |
+| `npm run dev`      | Start the Vite development server                   |
+| `npm run server`   | Start JSON Server using `db.json`                   |
+| `npm test`         | Run Vitest in watch mode                            |
+| `npm run test:run` | Run tests once                                      |
+| `npm run lint`     | Run ESLint                                          |
+| `npm run build`    | Run TypeScript checks and create a production build |
+| `npm run preview`  | Preview the production build locally                |
+
+## Future Improvements
+
+- Add Playwright end-to-end tests
+- Complete responsive and cross-browser accessibility testing
+- Deploy a live demo with a hosted API
+- Expand automated test coverage
+
+## Author
+
+**Xiaoyu Li**
+
+Frontend Developer focused on accessible, user-centred web applications.
+
+[GitHub](https://github.com/ninalix)

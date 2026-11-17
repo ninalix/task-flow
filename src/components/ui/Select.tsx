@@ -23,7 +23,14 @@ function Select({
 
   return (
     <div className="form-field">
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id}>
+        {label}
+        {rest.required && (
+          <span className="form-field__required" aria-hidden="true">
+            {" *"}
+          </span>
+        )}
+      </label>
       <select
         id={id}
         ref={ref}

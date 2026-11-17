@@ -22,7 +22,14 @@ function Textarea({
 
   return (
     <div className="form-field">
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id}>
+        {label}
+        {rest.required && (
+          <span className="form-field__required" aria-hidden="true">
+            {" *"}
+          </span>
+        )}
+      </label>
       <textarea 
         id={id}
         ref={ref}

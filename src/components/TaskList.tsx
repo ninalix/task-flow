@@ -8,7 +8,7 @@ type TaskListProps = {
 
 function TaskList({tasks, projects}: TaskListProps) {
   return (
-    <div className="task-table-wrapper">
+    <div className="task-table-wrapper" role="region" aria-label="Task table" tabIndex={0}>
       <table className="task-table">
         <thead>
           <tr>

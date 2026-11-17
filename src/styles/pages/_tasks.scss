@@ -53,7 +53,7 @@
 
   @media (max-width: 480px) {
     .create-task-link {
-      width: 100%;
+      //width: 100%;
     }
   }
 
@@ -334,5 +334,62 @@
 @media (prefers-reduced-motion: reduce) {
   .task-item {
     transition: none;
+  }
+}
+
+// ========================================
+// Responsive Task Table
+// ========================================
+
+.task-table-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+
+  &:focus-visible {
+    outline: var(--border-focus) solid var(--color-focus);
+    outline-offset: 2px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .task-table {
+    min-width: 720px;
+
+    thead th {
+      padding: var(--space-3) var(--space-4);
+    }
+
+    tbody th,
+    tbody td {
+      padding: var(--space-4);
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .task-table {
+    min-width: 680px;
+
+    thead th {
+      padding: var(--space-3);
+    }
+
+    tbody th,
+    tbody td {
+      padding: var(--space-3);
+    }
+
+    tbody th {
+      width: auto;
+      min-width: 180px;
+    }
+  }
+
+  .pagination {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
   }
 }
