@@ -37,18 +37,19 @@
     color: var(--color-danger);
   }
 
+  &__hint {
+    margin: 0;
+  }
+
   @media (max-width: 640px) {
     &__grid {
       grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-4);
     }
 
     &__actions {
-      flex-direction: column;
+      flex-direction: column-reverse;
       align-items: stretch;
-
-      > * {
-        width: 100%;
-      }
     }
   }
 }

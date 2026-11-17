@@ -20,19 +20,16 @@ function Input({
     error ? errorId : undefined,
   ].filter(Boolean).join(" ") || undefined;
 
-  // let finalDescribedBy: string | undefined;
-
-  // if(describedBy && error) {
-  //   finalDescribedBy = `${describedBy} ${errorId}`;
-  // } else if (describedBy) {
-  //   finalDescribedBy = describedBy;
-  // } else if (error) {
-  //   finalDescribedBy = errorId;
-  // }
-
   return (
     <div className="form-field">
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id}>
+        {label}
+        {rest.required && (
+          <span className="form-field__required" aria-hidden="true">
+            {" *"}
+          </span>
+        )}
+      </label>
       <input 
         id={id}
         ref={ref}

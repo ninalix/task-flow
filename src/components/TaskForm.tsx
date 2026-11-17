@@ -64,6 +64,9 @@ function TaskForm({title, onTitleChange, description, onDescriptionChange, statu
 
   return (
     <form className="task-form" onSubmit={onSubmit} noValidate>
+      <p className="task-form__hint">
+        Fields marked with * are required.
+      </p>
       <Input 
         id="title"
         label="Title"

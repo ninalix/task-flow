@@ -16,6 +16,7 @@
 .app-main {
   // Main content 的 padding 和 background
   flex: 1;
+  min-width: 0;
   padding: var(--space-8);
 }
 
@@ -78,5 +79,85 @@
       outline: var(--border-focus) solid var(--color-focus);
       outline-offset: 2px;
     }
+  }
+}
+
+.skip-link {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 100;
+
+  padding: var(--space-3) var(--space-4);
+
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: var(--radius-sm);
+
+  transform: translateY(calc(-100% - var(--space-4)));
+
+  &:focus {
+    transform: translateY(0);
+    outline: var(--border-focus) solid var(--color-focus);
+    outline-offset: 2px;
+  }
+}
+
+// Tablet and mobile layout
+@media (max-width: 1023px) {
+  .app-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+  }
+
+  .app-sidebar {
+    padding: var(--space-4) var(--space-6);
+    border: 0;
+    border-bottom: var(--border-subtle) solid var(--color-border-subtle);
+  }
+
+  .app-logo {
+    margin-bottom: var(--space-4);
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    gap: var(--space-6);
+  }
+
+  .sidebar-link {
+    padding: var(--space-3) var(--space-2);
+    text-align: center;
+  }
+
+  .app-main {
+    padding: var(--space-6);
+  }
+}
+
+// Mobile layout
+@media (max-width: 640px) {
+  .app-sidebar {
+    padding: var(--space-4);
+  }
+
+  .app-main {
+    padding: var(--space-4);
+  }
+
+  .sidebar-nav {
+    gap: var(--space-2);
+  }
+
+  .sidebar-link {
+    flex: 1;
+    min-width: 0;
+    padding: var(--space-3) var(--space-1);
+    font-size: var(--font-size-body-sm);
+    overflow-wrap: anywhere;
+  }
+
+  .app-logo {
+    margin-bottom: var(--space-3);
   }
 }

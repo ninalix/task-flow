@@ -11,7 +11,7 @@ function Sidebar() {
         </NavLink>
       </div>
       <nav aria-label="Main navigation" className="sidebar-nav">
-        <NavLink to="/" className={({isActive}) => isActive ? "sidebar-link active" : "sidebar-link"}>
+        <NavLink to="/" end className={({isActive}) => isActive ? "sidebar-link active" : "sidebar-link"}>
           Dashboard
         </NavLink>
         <NavLink to="/tasks" className={({isActive}) => isActive ? "sidebar-link active" : "sidebar-link"}>

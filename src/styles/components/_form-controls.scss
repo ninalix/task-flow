@@ -80,3 +80,8 @@
     color: var(--color-text-muted);
   }
 }
+
+.form-field__required {
+  color: var(--color-danger);
+  font-weight: var(--font-weight-semibold);
+}
