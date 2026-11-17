@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import Button from "./ui/Button";
 
 export type ConfirmDialogProps = {
   isOpen: boolean;
@@ -61,6 +62,14 @@ function ConfirmDialog({
         const lastElement = focusableElements[focusableElements.length - 1];
 
         if(!firstElement || !lastElement) {
+          event.preventDefault();
+          dialog.focus();
+          return;
+        }
+
+        if (!dialog.contains(document.activeElement)) {
+          event.preventDefault();
+          dialog.focus();
           return;
         }
 
@@ -101,10 +110,12 @@ function ConfirmDialog({
           <h2 id="dialog-title">{title}</h2>
           <p id="dialog-message">{message}</p>
           {error && <p role="alert">{error}</p>}
-          <button type="button" ref={cancelRef} onClick={onClose} disabled={deleting}>Cancel</button>
-          <button type="button" onClick={onConfirm} disabled={deleting}>
-            {deleting ? loadingLabel : confirmLabel}
-          </button>
+
+          <div className="dialog__actions">
+            <Button variant="secondary" ref={cancelRef} onClick={onClose} disabled={deleting}>Cancel</Button>
+            <Button variant="primary" onClick={onConfirm} disabled={deleting}>{deleting ? loadingLabel : confirmLabel}</Button>
+          </div>
+          
         </div>
       </div>
     );
