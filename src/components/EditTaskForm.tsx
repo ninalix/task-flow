@@ -4,6 +4,7 @@ import type { Task, CreateTaskInput, Project } from "../types";
 import type { TaskFormErrors } from "../utils/validateTaskForm";
 import TaskForm from "./TaskForm";
 import validateTaskForm from "../utils/validateTaskForm";
+import { API_BASE_URL } from "../config/api";
 
 type EditTaskFormProps = {
   task: Task;
@@ -73,7 +74,7 @@ function EditTaskForm({task, projects, projectsLoading, projectsError, fetchProj
     setSaveError("");
 
     try { 
-      const response = await fetch(`http://localhost:3000/tasks/${task.id}`, {
+      const response = await fetch(`${API_BASE_URL}/tasks/${task.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json"

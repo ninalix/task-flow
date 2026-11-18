@@ -6,6 +6,7 @@ import ConfirmDialog from "../components/ConfirmDialog";
 import Button from "../components/ui/Button";
 import Badge from "../components/ui/Badge";
 import { statusVariants, priorityVariants } from "../utils/taskVariants";
+import { API_BASE_URL } from "../config/api";
 
 function TaskDetailPage() {
   const params = useParams();
@@ -69,7 +70,7 @@ function TaskDetailPage() {
     setDeleteError("");
 
     try {
-      const response = await fetch(`http://localhost:3000/tasks/${task.id}`, {
+      const response = await fetch(`${API_BASE_URL}/tasks/${task.id}`, {
         method: "DELETE"
       });
 

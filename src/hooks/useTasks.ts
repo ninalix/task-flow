@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import type { Task } from "../types";
+import { API_BASE_URL } from "../config/api";
 
 function useTasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -11,7 +12,7 @@ function useTasks() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:3000/tasks");
+      const response = await fetch(`${API_BASE_URL}/tasks`);
 
       if(!response.ok) {
         throw new Error("Failed to fetch tasks.");
