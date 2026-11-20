@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import type { Project } from "../types";
+import { API_BASE_URL } from "../config/api";
 
 function useProjects() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -11,7 +12,7 @@ function useProjects() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:3000/projects", {
+      const response = await fetch(`${API_BASE_URL}/projects`, {
         signal
       });
 

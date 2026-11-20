@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import type { Task } from "../types";
+import { API_BASE_URL } from "../config/api";
 
 function useTask(id: string | undefined) {
   const [task, setTask] = useState<Task | null>(null);
@@ -23,7 +24,7 @@ function useTask(id: string | undefined) {
     setTask(null);
 
     try {
-      const response = await fetch(`http://localhost:3000/tasks/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/tasks/${id}`, {
         signal
       });
 

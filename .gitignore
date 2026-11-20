@@ -24,3 +24,12 @@ dist-ssr
 *.sw?
 
 coverage/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# E2E temporary database
+/e2e/.tmp/

@@ -6,6 +6,7 @@ import TaskForm from "../components/TaskForm";
 import validateTaskForm from "../utils/validateTaskForm";
 import type { TaskFormErrors } from "../utils/validateTaskForm";
 import TaskFormLayout from "../components/TaskFormLayout";
+import { API_BASE_URL } from "../config/api";
 
 function CreateTaskPage() {
   const [title, setTitle] = useState("");
@@ -68,7 +69,7 @@ function CreateTaskPage() {
     setSaveError("");
 
     try {
-      const response = await fetch("http://localhost:3000/tasks", {
+      const response = await fetch(`${API_BASE_URL}/tasks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
